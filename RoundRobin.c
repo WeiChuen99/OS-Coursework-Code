@@ -105,13 +105,23 @@ void findavgTime(int processes[], int n, int bt[],
 // Driver code 
 int main() 
 { 
+    int num_processes, i;
     // process id's 
-    int processes[] = { 1, 2, 3}; 
+    printf("Set number of processes.\n");
+    scanf("%d",&num_processes);
+
+    int processes[num_processes]; 
     int n = sizeof processes / sizeof processes[0]; 
   
     // Burst time of all processes 
-    int burst_time[] = {10, 5, 8}; 
-  
+    int burst_time[num_processes];
+
+    for (i=0; i < num_processes; i++)
+    {
+        printf("Set burst times for processes %d .\n",i+1);
+        scanf("%d",&burst_time[i]);
+    }
+
     // Time quantum 
     int quantum = 2; 
     findavgTime(processes, n, burst_time, quantum); 
