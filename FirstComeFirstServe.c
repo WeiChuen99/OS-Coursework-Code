@@ -72,8 +72,6 @@ int main()
 
 	for(i = 0; i < numberOfProcesses; i++)
 	{
-		printf("Please enter process ID: \n");
-		scanf("%d",&processes[i]);
 		printf("Please enter burst time for process id number %d \n",i + 1 );
 		scanf("%d",&burst_time[i]);			
 	}
