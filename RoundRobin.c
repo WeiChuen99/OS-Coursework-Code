@@ -1,7 +1,10 @@
 #include <stdio.h>
 
 // Function to find the waiting time for all 
-// processes 
+// processes = array contain process id
+// n = 	number of element in the array
+// waitingTime = array to store wait time 
+// burstTime = array to store bursting time  
 void findWaitingTime(int processes[], int n, 
              int burstTime[], int waitingTime[], int quantum) 
 { 
@@ -106,7 +109,8 @@ void findavgTime(int processes[], int n, int burstTime[],
 int main() 
 { 
     int num_processes, i, quantum;
-    // process id's 
+
+    // get user desired number of process and time quantum
     printf("Set number of processes and time quantum.\n");
     scanf("%d%d",&num_processes,&quantum);
 
@@ -117,7 +121,9 @@ int main()
     }
 
     int processes[num_processes]; 
-    int n = sizeof processes / sizeof processes[0]; 
+
+    //get number of element in the array
+    int n = sizeof processes / sizeof processes[0];  
   
     // Burst time of all processes 
     int burst_time[num_processes];
@@ -127,7 +133,7 @@ int main()
         printf("Set burst times for processes %d .\n",i+1);
         scanf("%d",&burst_time[i]);
 
-        //maek sure burst time more than 0
+        //make sure burst time more than 0
         if(burst_time[i] <= 0){
         	printf("Set burst times for processes %d .\n",i+1);
         	scanf("%d",&burst_time[i]);
