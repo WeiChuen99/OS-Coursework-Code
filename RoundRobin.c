@@ -3,13 +3,13 @@
 // Function to find the waiting time for all 
 // processes 
 void findWaitingTime(int processes[], int n, 
-             int bt[], int wt[], int quantum) 
+             int burstTime[], int waitingTime[], int quantum) 
 { 
-    // Make a copy of burst times bt[] to store remaining 
+    // Make a copy of burst times burstTime[] to store remaining 
     // burst times. 
-    int rem_bt[n]; 
+    int remainingBurstTime[n]; 
     for (int i = 0 ; i < n ; i++) 
-        rem_bt[i] =  bt[i]; 
+        remainingBurstTime[i] =  burstTime[i]; 
   
     int t = 0; // Current time 
   
@@ -24,11 +24,11 @@ void findWaitingTime(int processes[], int n,
         { 
             // If burst time of a process is greater than 0 
             // then only need to process further 
-            if (rem_bt[i] > 0) 
+            if (remainingBurstTime[i] > 0) 
             { 
                 done = 0; // There is a pending process 
   
-                if (rem_bt[i] > quantum) 
+                if (remainingBurstTime[i] > quantum) 
                 { 
                     // Increase the value of t i.e. shows 
                     // how much time a process has been processed 
@@ -36,7 +36,7 @@ void findWaitingTime(int processes[], int n,
   
                     // Decrease the burst_time of current process 
                     // by quantum 
-                    rem_bt[i] -= quantum; 
+                    remainingBurstTime[i] -= quantum; 
                 } 
   
                 // If burst time is smaller than or equal to 
@@ -45,15 +45,15 @@ void findWaitingTime(int processes[], int n,
                 { 
                     // Increase the value of t i.e. shows 
                     // how much time a process has been processed 
-                    t = t + rem_bt[i]; 
+                    t = t + remainingBurstTime[i]; 
   
                     // Waiting time is current time minus time 
                     // used by this process 
-                    wt[i] = t - bt[i]; 
+                    waitingTime[i] = t - burstTime[i]; 
   
                     // As the process gets fully executed 
                     // make its remaining burst time = 0 
-                    rem_bt[i] = 0; 
+                    remainingBurstTime[i] = 0; 
                 } 
             } 
         } 
@@ -66,25 +66,25 @@ void findWaitingTime(int processes[], int n,
   
 // Function to calculate turn around time 
 void findTurnAroundTime(int processes[], int n, 
-                        int bt[], int wt[], int tat[]) 
+                        int burstTime[], int waitingTime[], int turnAroundTime[]) 
 { 
     // calculating turnaround time by adding 
-    // bt[i] + wt[i] 
+    // burstTime[i] + waitingTime[i] 
     for (int i = 0; i < n ; i++) 
-        tat[i] = bt[i] + wt[i]; 
+        turnAroundTime[i] = burstTime[i] + waitingTime[i]; 
 } 
   
 // Function to calculate average time 
-void findavgTime(int processes[], int n, int bt[], 
+void findavgTime(int processes[], int n, int burstTime[], 
                                      int quantum) 
 { 
-    int wt[n], tat[n], total_wt = 0, total_tat = 0; 
+    int waitingTime[n], turnAroundTime[n], totalWaitingTime = 0, totalTurnAroundTime = 0; 
   
     // Function to find waiting time of all processes 
-    findWaitingTime(processes, n, bt, wt, quantum); 
+    findWaitingTime(processes, n, burstTime, waitingTime, quantum); 
   
     // Function to find turn around time for all processes 
-    findTurnAroundTime(processes, n, bt, wt, tat); 
+    findTurnAroundTime(processes, n, burstTime, waitingTime, turnAroundTime); 
   
     // Display processes along with all details 
     printf("Processes, Burst time, Waiting time, Turn around time\n");
@@ -93,13 +93,13 @@ void findavgTime(int processes[], int n, int bt[],
     // around time 
     for (int i=0; i<n; i++) 
     { 
-        total_wt = total_wt + wt[i]; 
-        total_tat = total_tat + tat[i]; 
-        printf(" %d \t\t %d\t %d\t\t %d\n",i+1,bt[i],wt[i],tat[i]);
+        totalWaitingTime = totalWaitingTime + waitingTime[i]; 
+        totalTurnAroundTime = totalTurnAroundTime + turnAroundTime[i]; 
+        printf(" %d \t\t %d\t %d\t\t %d\n",i+1,burstTime[i],waitingTime[i],turnAroundTime[i]);
     } 
   
-    printf("Average waiting time = %.2f",(float)total_wt / (float)n);
-    printf("\nAverage turn around time = %.2f",(float)total_wt / (float)n);
+    printf("Average waiting time = %.2f",(float)totalWaitingTime / (float)n);
+    printf("\nAverage turn around time = %.2f",(float)totalWaitingTime / (float)n);
 } 
   
 // Driver code 
