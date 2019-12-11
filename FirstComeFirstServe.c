@@ -1,6 +1,7 @@
 // C program for implementation of FCFS 
 // scheduling 
 #include<stdio.h>
+#include<ctype.h>
 // Function to find the waiting time for all 
 // processes = array contain process id
 // n = 	number of element in the array
@@ -68,18 +69,25 @@ int main()
 	scanf("%d",&numberOfProcesses);
 	printf("Number of processes = %d\n",numberOfProcesses );
 
-	if(numberOfProcesses < 0){
+	//make sure number of process more than 0
+	if(numberOfProcesses <= 0){
 		printf("Please enter number of processes:" );
 		scanf("%d",&numberOfProcesses);
 	}
-	
+
 	int processes[numberOfProcesses];
 	int burst_time[numberOfProcesses];
 
 	for(i = 0; i < numberOfProcesses; i++)
 	{
 		printf("Please enter burst time for process id number %d \n",i + 1 );
-		scanf("%d",&burst_time[i]);			
+		scanf("%d",&burst_time[i]);
+
+		//make sure burst time more than 0
+		if(burstime[i] <= 0){
+			printf("Please enter burst time for process id number %d \n",i + 1 );
+			scanf("%d",&burst_time[i]);			
+		}			
 	}
 	findAverageTime(processes, numberOfProcesses , burst_time); 
 	return 0; 

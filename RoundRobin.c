@@ -110,6 +110,7 @@ int main()
     printf("Set number of processes and time quantum.\n");
     scanf("%d%d",&num_processes,&quantum);
 
+    //make sure num of process and quantum more tahn 0
     if(num_processes <= 0 || quantum <= 0){
     	printf("Set number of processes and time quantum.\n");
     	scanf("%d%d",&num_processes,&quantum);
@@ -125,6 +126,12 @@ int main()
     {
         printf("Set burst times for processes %d .\n",i+1);
         scanf("%d",&burst_time[i]);
+
+        //maek sure burst time more than 0
+        if(burst_time[i] <= 0){
+        	printf("Set burst times for processes %d .\n",i+1);
+        	scanf("%d",&burst_time[i]);
+        }
     }
 
     findavgTime(processes, n, burst_time, quantum); 
