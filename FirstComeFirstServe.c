@@ -1,7 +1,6 @@
 // C program for implementation of FCFS 
 // scheduling 
 #include<stdio.h>
-#include <ctype.h> 
 // Function to find the waiting time for all 
 // processes = array contain process id
 // n = 	number of element in the array
@@ -65,8 +64,6 @@ void findAverageTime( int processes[], int n, int burstTime[])
 int main() 
 { 
 	int numberOfProcesses,i,varForWhileLoop;
-
-	input:
 	printf("Please enter number of processes:" );
 	scanf("%d",&numberOfProcesses);
 	printf("%d\n",numberOfProcesses );
