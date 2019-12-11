@@ -110,6 +110,11 @@ int main()
     printf("Set number of processes and time quantum.\n");
     scanf("%d%d",&num_processes,&quantum);
 
+    if(num_processes <= 0 || quantum <= 0){
+    	printf("Set number of processes and time quantum.\n");
+    	scanf("%d%d",&num_processes,&quantum);
+    }
+
     int processes[num_processes]; 
     int n = sizeof processes / sizeof processes[0]; 
   

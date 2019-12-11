@@ -66,7 +66,13 @@ int main()
 	int numberOfProcesses,i,varForWhileLoop;
 	printf("Please enter number of processes:" );
 	scanf("%d",&numberOfProcesses);
-	printf("%d\n",numberOfProcesses );
+	printf("Number of processes = %d\n",numberOfProcesses );
+
+	if(numberOfProcesses < 0){
+		printf("Please enter number of processes:" );
+		scanf("%d",&numberOfProcesses);
+	}
+	
 	int processes[numberOfProcesses];
 	int burst_time[numberOfProcesses];
 
