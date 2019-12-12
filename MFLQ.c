@@ -39,6 +39,15 @@ void findWaitingTime(int processes[], int n,
                     // Decrease the burst_time of current process
                     // by quantum
                     rem_bt[i] -= quantum;
+                    if(rem_bt[i] > 0 && prt[i] < 3 ){
+                        prt[i] += 1;
+                    }
+
+                    if(prt[i] == 3){
+                            //printf("entered");
+                        quantum = rem_bt[i];
+                    }
+
                 }
 
                 // If burst time is smaller than or equal to
@@ -58,7 +67,8 @@ void findWaitingTime(int processes[], int n,
                     rem_bt[i] = 0;
                 }
             }
-            quantum = quantum * 2;
+            //Second queue will have more quantum time allocated
+
             /*if(rem_bt[i] <= 5){
             prt[i] = 1;
             }else if(rem_bt[i] > 5 && rem_bt[i] <= 10 ){
@@ -68,6 +78,8 @@ void findWaitingTime(int processes[], int n,
                 prt[i] = 3;*/
         }
 
+        quantum = quantum * 2;
+       // printf("entered!");
         // If all processes are done
         if (done == 1)
           break;
