@@ -1,7 +1,35 @@
 // C program for implementation of FCFS 
 // scheduling 
-#include<stdio.h>
-#include<ctype.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+//function to validate if input has character.
+int haschar(char chararr[], int len){
+    int haschar = 0;
+    int i = 0;
+
+    while (len > 0 && isspace(chararr[len - 1])){
+        len--;     // strip trailing newline or other white space
+    }
+
+    if (len > 0)
+    {
+        haschar = 0;
+        for (i = 0; i < len; ++i)
+        {
+            if (!isdigit(chararr[i]))
+            {
+                haschar = 1;
+                break;
+            }
+        }
+    }
+
+    return haschar;
+}
+
 // Function to find the waiting time for all 
 // processes = array contain process id
 // n = 	number of element in the array
@@ -64,32 +92,35 @@ void findAverageTime( int processes[], int n, int burstTime[])
 // Driver code 
 int main() 
 { 
-	int numberOfProcesses,i,varForWhileLoop;
-	printf("Please enter number of processes:" );
-	scanf("%d",&numberOfProcesses);
-	printf("Number of processes = %d\n",numberOfProcesses );
+	int num_processes = 0, i = 0;
+	char chrarr1[10], chrarr2[10];
 
-	//make sure number of process more than 0
-	if(numberOfProcesses <= 0){
-		printf("Please enter number of processes:" );
-		scanf("%d",&numberOfProcesses);
-	}
+	printf("Set number of processes.\n");
+    gets(chrarr1);
 
-	int processes[numberOfProcesses];
-	int burst_time[numberOfProcesses];
+    while(atoi(chrarr1) <= 0 || haschar(chrarr1, strlen(chrarr1)) ){
+    	printf("Number of processes must be positive and cannot contain character, please enter again.\n");
+    	printf("Number of processes: \n");
+    	gets(chrarr1);
+    }
 
-	for(i = 0; i < numberOfProcesses; i++)
+    num_processes = atoi(chrarr1);
+
+	int processes[num_processes];
+	int burst_time[num_processes];
+
+	for(i = 0; i < num_processes; i++)
 	{
-		printf("Please enter burst time for process id number %d \n",i + 1 );
-		scanf("%d",&burst_time[i]);
+		printf("Set burst times for process %d .\n",i+1);
+        gets(chrarr2);
 
-		//make sure burst time more than 0
-		if(burstime[i] <= 0){
-			printf("Please enter burst time for process id number %d \n",i + 1 );
-			scanf("%d",&burst_time[i]);			
-		}			
+        while(atoi(chrarr2) <= 0 || haschar(chrarr2, strlen(chrarr2))){
+            printf("Burst time must be positive and cannot contain character, please enter again.\n");
+        	printf("Set burst times for processes %d .\n",i+1);
+        	gets(chrarr2);
+        }
+        burst_time[i] = atoi(chrarr2);
 	}
-	findAverageTime(processes, numberOfProcesses , burst_time); 
+	findAverageTime(processes, num_processes , burst_time); 
 	return 0; 
-
 } 
