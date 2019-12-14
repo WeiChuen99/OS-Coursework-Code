@@ -64,7 +64,7 @@ void findAverageTime( int processes[], int n, int burstTime[])
 // Driver code 
 int main() 
 { 
-	int numberOfProcesses,i,varForWhileLoop;
+	int numberOfProcesses,i;
 	printf("Please enter number of processes:" );
 	scanf("%d",&numberOfProcesses);
 	printf("Number of processes = %d\n",numberOfProcesses );
@@ -84,12 +84,11 @@ int main()
 		scanf("%d",&burst_time[i]);
 
 		//make sure burst time more than 0
-		if(burstime[i] <= 0){
+		if(burst_time[i] <= 0){
 			printf("Please enter burst time for process id number %d \n",i + 1 );
 			scanf("%d",&burst_time[i]);			
-		}			
+		}
 	}
 	findAverageTime(processes, numberOfProcesses , burst_time); 
 	return 0; 
-
 } 

@@ -1,10 +1,15 @@
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+//function prototype to validate if input has character.
+int haschar(char chararr[], int sizearr);
 
 // Function to find the waiting time for all 
 // processes = array contain process id
 // n = 	number of element in the array
 // waitingTime = array to store wait time 
-// burstTime = array to store bursting time  
+// burstTime = array to store bursting time
 void findWaitingTime(int processes[], int n, 
              int burstTime[], int waitingTime[], int quantum) 
 { 
@@ -106,19 +111,33 @@ void findavgTime(int processes[], int n, int burstTime[],
 } 
   
 // Driver code 
-int main() 
+int main()
 { 
-    int num_processes, i, quantum;
+    int num_processes, i, quantum = 0;
+    int chrarr1[10], chrarr2[10], chrarr3[10];
 
     // get user desired number of process and time quantum
-    printf("Set number of processes and time quantum.\n");
-    scanf("%d%d",&num_processes,&quantum);
+    printf("Set number of processes.\n");
+    gets(chrarr1);
+    
+    printf("Set time quantum.\n");
+    gets(chrarr2);
 
-    //make sure num of process and quantum more tahn 0
-    if(num_processes <= 0 || quantum <= 0){
-    	printf("Set number of processes and time quantum.\n");
-    	scanf("%d%d",&num_processes,&quantum);
+    //input output error handling
+    //make sure num of process and quantum more than 0 and inputs does not contain character
+    //atoi converts string to int
+    while(atoi(chrarr1) <= 0 || atoi(chrarr2) <= 0 || haschar(chrarr1, strlen(chrarr1)) || haschar(chrarr1, strlen(chrarr2))){
+    	printf("Number of processes and time quantum must be positive and cannot contain character, please enter again.\n");
+    	//scanf("%d%d",&num_processes,&quantum);
+        printf("Number of processes: \n");
+        gets(chrarr1);
+        printf("Time quantum: \n");
+        gets(chrarr2);
     }
+
+    //convert string into int
+    num_processes = atoi(chrarr1);
+    quantum = atoi(chrarr2);
 
     int processes[num_processes]; 
 
@@ -130,16 +149,44 @@ int main()
 
     for (i=0; i < num_processes; i++)
     {
-        printf("Set burst times for processes %d .\n",i+1);
-        scanf("%d",&burst_time[i]);
+        printf("Set burst times for process %d .\n",i+1);
+        gets(chrarr3);
+        //burst_time[i]
 
-        //make sure burst time more than 0
-        if(burst_time[i] <= 0){
-        	printf("Set burst times for processes %d .\n",i+1);
-        	scanf("%d",&burst_time[i]);
+        //make sure burst time more than 0 and does not have character
+        while(atoi(chrarr3) <= 0 || haschar(chrarr3, strlen(chrarr3))){
+            printf("Burst time must be positive and cannot contain character, please enter again.\n");
+        	printf("Set burst times for processe %d .\n",i+1);
+        	gets(chrarr3);
         }
+        burst_time[i] = atoi(chrarr3);
     }
 
     findavgTime(processes, n, burst_time, quantum); 
     return 0; 
 } 
+
+//validates of input has character
+int haschar(char chararr[], int len){
+    int haschar = 0;
+    int i = 0;
+
+    while (len > 0 && isspace(chararr[len - 1])){
+        len--;     // strip trailing newline or other white space
+    }
+
+    if (len > 0)
+    {
+        haschar = 0;
+        for (i = 0; i < len; ++i)
+        {
+            if (!isdigit(chararr[i]))
+            {
+                haschar = 1;
+                break;
+            }
+        }
+    }
+
+    return haschar;
+}
