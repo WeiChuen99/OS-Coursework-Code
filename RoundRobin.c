@@ -127,7 +127,7 @@ int main()
     //input output error handling
     //make sure num of process and quantum more than 0 and inputs does not contain character
     //atoi converts string to int
-    while(atoi(chrarr1) <= 0 || atoi(chrarr2) <= 0 || haschar(chrarr1, strlen(chrarr1)) || haschar(chrarr1, strlen(chrarr2))){
+    while(atoi(chrarr1) <= 0 || atoi(chrarr2) <= 0 || haschar(chrarr1, strlen(chrarr1)) || haschar(chrarr2, strlen(chrarr2))){
         printf("Number of processes and time quantum must be positive and cannot contain character, please enter again.\n");
         //scanf("%d%d",&num_processes,&quantum);
         printf("Number of processes: \n");
