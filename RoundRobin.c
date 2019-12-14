@@ -106,6 +106,7 @@ void findavgTime(int processes[], int n, int burstTime[],
         printf(" %d \t\t %d\t %d\t\t %d\n",i+1,burstTime[i],waitingTime[i],turnAroundTime[i]);
     } 
   
+    printf("Time quantum = %d\n",quantum);
     printf("Average waiting time = %.2f",(float)totalWaitingTime / (float)n);
     printf("\nAverage turn around time = %.2f",(float)totalWaitingTime / (float)n);
 } 
@@ -151,7 +152,6 @@ int main()
     {
         printf("Set burst times for process %d .\n",i+1);
         gets(chrarr3);
-        //burst_time[i]
 
         //make sure burst time more than 0 and does not have character
         while(atoi(chrarr3) <= 0 || haschar(chrarr3, strlen(chrarr3))){
