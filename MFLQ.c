@@ -121,7 +121,7 @@ void findavgTime(int processes[], int n, int bt[],
     }
 
     printf("Average waiting time = %.2f",(float)total_wt / (float)n);
-    printf("\nAverage turn around time = %.2f\n\n",(float)total_wt / (float)n);
+    printf("\nAverage turn around time = %.2f\n\n",(float)total_tat / (float)n);
 }
 
 // Driver code
