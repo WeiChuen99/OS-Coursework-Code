@@ -106,6 +106,7 @@ void findavgTime(int processes[], int n, int burstTime[],
         printf(" %d \t\t %d\t %d\t\t %d\n",i+1,burstTime[i],waitingTime[i],turnAroundTime[i]);
     } 
   
+    printf("Time quantum = %d\n",quantum);
     printf("Average waiting time = %.2f",(float)totalWaitingTime / (float)n);
     printf("\nAverage turn around time = %.2f",(float)totalWaitingTime / (float)n);
 } 
@@ -126,7 +127,7 @@ int main()
     //input output error handling
     //make sure num of process and quantum more than 0 and inputs does not contain character
     //atoi converts string to int
-    while(atoi(chrarr1) <= 0 || atoi(chrarr2) <= 0 || haschar(chrarr1, strlen(chrarr1)) || haschar(chrarr1, strlen(chrarr2))){
+    while(atoi(chrarr1) <= 0 || atoi(chrarr2) <= 0 || haschar(chrarr1, strlen(chrarr1)) || haschar(chrarr2, strlen(chrarr2))){
         printf("Number of processes and time quantum must be positive and cannot contain character, please enter again.\n");
         //scanf("%d%d",&num_processes,&quantum);
         printf("Number of processes: \n");
@@ -151,7 +152,6 @@ int main()
     {
         printf("Set burst times for process %d .\n",i+1);
         gets(chrarr3);
-        //burst_time[i]
 
         //make sure burst time more than 0 and does not have character
         while(atoi(chrarr3) <= 0 || haschar(chrarr3, strlen(chrarr3))){

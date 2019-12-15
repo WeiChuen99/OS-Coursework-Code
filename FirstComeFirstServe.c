@@ -95,17 +95,25 @@ int main()
 	int num_processes = 0, i = 0;
 	char chrarr1[10], chrarr2[10];
 
+
+	// get user desired number of process
 	printf("Set number of processes.\n");
     gets(chrarr1);
 
+
+    //input output error handling
+    //make sure process more than 0 and input does not contain character
+    //atoi converts string to int 
     while(atoi(chrarr1) <= 0 || haschar(chrarr1, strlen(chrarr1)) ){
     	printf("Number of processes must be positive and cannot contain character, please enter again.\n");
     	printf("Number of processes: \n");
     	gets(chrarr1);
     }
 
+    //convert string into int 
     num_processes = atoi(chrarr1);
 
+    //array to store number of processes and burst time 
 	int processes[num_processes];
 	int burst_time[num_processes];
 
@@ -114,6 +122,7 @@ int main()
 		printf("Set burst times for process %d .\n",i+1);
         gets(chrarr2);
 
+        //make sure burst time more than 0 and does not have character 
         while(atoi(chrarr2) <= 0 || haschar(chrarr2, strlen(chrarr2))){
             printf("Burst time must be positive and cannot contain character, please enter again.\n");
         	printf("Set burst times for processes %d .\n",i+1);
