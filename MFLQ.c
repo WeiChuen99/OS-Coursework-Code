@@ -39,11 +39,11 @@ void findWaitingTime(int processes[], int n,
                     // Decrease the burst_time of current process
                     // by quantum
                     rem_bt[i] -= quantum;
-                    if(rem_bt[i] > 0 && prt[i] < 3 ){
+                    if(rem_bt[i] > 0 && prt[i] == 1 ){
                         prt[i] += 1;
                     }
 
-                    if(prt[i] == 3){
+                    else{
                             //printf("entered");
                         quantum = rem_bt[i];
                     }
@@ -147,11 +147,9 @@ int main()
         scanf("%d",&burst_time[i]);
         if(burst_time[i] <= 5){
             priorities[i] = 1;
-        }else if(burst_time[i] > 5 && burst_time[i] <= 10 ){
+        }else if(burst_time[i] > 5){
             priorities[i] = 2;
         }
-        else
-            priorities[i] = 3;
     }
 
     // Time quantum
