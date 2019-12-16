@@ -108,7 +108,7 @@ void findavgTime(int processes[], int n, int burstTime[],
   
     printf("Time quantum = %d\n",quantum);
     printf("Average waiting time = %.2f",(float)totalWaitingTime / (float)n);
-    printf("\nAverage turn around time = %.2f",(float)totalWaitingTime / (float)n);
+    printf("\nAverage turn around time = %.2f",(float)totalTurnAroundTime / (float)n);
 } 
   
 // Driver code 
