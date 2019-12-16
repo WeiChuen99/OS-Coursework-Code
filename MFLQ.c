@@ -88,9 +88,11 @@ void findWaitingTime(int processes[], int n,
                             check = 0;
                             continue;
                         }
-                        else
+                        else{
                            quantum = rem_bt[i];
                            rem_bt[i] -= quantum;
+
+                        }
                     }
 
                 }
