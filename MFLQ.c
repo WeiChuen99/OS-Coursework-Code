@@ -35,7 +35,7 @@ void findWaitingTime(int processes[], int n,
 {
     // Make a copy of burst times bt[] to store remaining
     // burst times.
-    int rem_bt[n],j;
+    int rem_bt[n],j,counter,check;
     for (int i = 0 ; i < n ; i++)
         rem_bt[i] =  bt[i];
 
@@ -166,7 +166,7 @@ int main()
     // get user desired number of process and time quantum
     printf("Set number of processes.\n");
     gets(chrarr1);
-    
+
     printf("Set time quantum.\n");
     gets(chrarr2);
 
