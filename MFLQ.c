@@ -35,7 +35,7 @@ void findWaitingTime(int processes[], int n,
 {
     // Make a copy of burst times bt[] to store remaining
     // burst times.
-    int rem_bt[n],j;
+    int rem_bt[n],j,counter,check;
     for (int i = 0 ; i < n ; i++)
         rem_bt[i] =  bt[i];
 
@@ -66,14 +66,31 @@ void findWaitingTime(int processes[], int n,
 
                     // Decrease the burst_time of current process
                     // by quantum
-                    rem_bt[i] -= quantum;
-                    if(rem_bt[i] > 0 && prt[i] == 1 ){
-                        prt[i] += 1;
-                    }
 
+
+
+                    if(prt[i] == 1){
+                        rem_bt[i] -= quantum;
+                        if(rem_bt[i] > 0){
+                            prt[i] += 1;
+                        }
+                    }
                     else{
-                            //printf("entered");
-                        quantum = rem_bt[i];
+                        for(counter = 0; counter < n; counter ++){
+                            if(prt[counter] == 1){
+                                check = 1;
+                                break;
+                            }
+                            else
+                                check = 0;
+                        }
+                        if(check == 1){
+                            check = 0;
+                            continue;
+                        }
+                        else
+                           quantum = rem_bt[i];
+                           rem_bt[i] -= quantum;
                     }
 
                 }
@@ -95,19 +112,10 @@ void findWaitingTime(int processes[], int n,
                     rem_bt[i] = 0;
                 }
             }
-            //Second queue will have more quantum time allocated
 
-            /*if(rem_bt[i] <= 5){
-            prt[i] = 1;
-            }else if(rem_bt[i] > 5 && rem_bt[i] <= 10 ){
-                prt[i] = 2;
-            }
-            else
-                prt[i] = 3;*/
         }
 
         quantum = quantum * 2;
-       // printf("entered!");
         // If all processes are done
         if (done == 1)
           break;
@@ -149,7 +157,7 @@ void findavgTime(int processes[], int n, int bt[],
     }
 
     printf("Average waiting time = %.2f",(float)total_wt / (float)n);
-    printf("\nAverage turn around time = %.2f\n\n",(float)total_wt / (float)n);
+    printf("\nAverage turn around time = %.2f\n\n",(float)total_tat / (float)n);
 }
 
 // Driver code
@@ -162,7 +170,7 @@ int main()
     // get user desired number of process and time quantum
     printf("Set number of processes.\n");
     gets(chrarr1);
-    
+
     printf("Set time quantum.\n");
     gets(chrarr2);
 
