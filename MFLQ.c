@@ -41,8 +41,8 @@ void findWaitingTime(int processes[], int n,
 
     int t = 0; // Current time
 
-    // Keep traversing processes in round robin manner
-    // until all of them are not done.
+    // Keep traversing processes
+    // until all of them are done.
     while (1)
     {
         int done = 1;
@@ -50,11 +50,10 @@ void findWaitingTime(int processes[], int n,
         // Traverse all processes one by one repeatedly
         for (int i = 0 ; i < n; i++)
         {
-
-            //printf("%d",i);
             // If burst time of a process is greater than 0
+            // If priority is 1(not demoted)
             // then only need to process further
-            if (rem_bt[i] > 0)
+            if (rem_bt[i] > 0 && prt[i] == 1)
             {
                 done = 0; // There is a pending process
 
@@ -67,15 +66,12 @@ void findWaitingTime(int processes[], int n,
                     // Decrease the burst_time of current process
                     // by quantum
                     rem_bt[i] -= quantum;
-                    if(rem_bt[i] > 0 && prt[i] == 1 ){
-                        prt[i] += 1;
-                    }
 
-                    else{
-                            //printf("entered");
-                        quantum = rem_bt[i];
-                    }
 
+
+                    //after allocated time quantum, process is demoted to queue 2
+                    printf("process %d demoted to queue 2(FCFS).\n", i+1);
+                    prt[i] = 2;
                 }
 
                 // If burst time is smaller than or equal to
@@ -95,22 +91,29 @@ void findWaitingTime(int processes[], int n,
                     rem_bt[i] = 0;
                 }
             }
-            //Second queue will have more quantum time allocated
 
-            /*if(rem_bt[i] <= 5){
-            prt[i] = 1;
-            }else if(rem_bt[i] > 5 && rem_bt[i] <= 10 ){
-                prt[i] = 2;
+
+            //FCFS
+            //remaining processes are scheduled using first come first serve schedular.
+            else if (rem_bt[i] > 0 && prt[i] == 2)
+            {
+                done = 0;
+                // Increase the value of t i.e. shows
+                // how much time a process has been processed
+                t = t + rem_bt[i];
+
+                // Waiting time is current time minus time
+                // used by this process
+                wt[i] = t - bt[i];
+
+                // As the process gets fully executed
+                // make its remaining burst time = 0
+                rem_bt[i] = 0;
             }
-            else
-                prt[i] = 3;*/
         }
-
-        quantum = quantum * 2;
-       // printf("entered!");
-        // If all processes are done
-        if (done == 1)
+        if (done == 1){
           break;
+        }
     }
 }
 
@@ -148,8 +151,9 @@ void findavgTime(int processes[], int n, int bt[],
         printf("    %d \t\t%d\t   %d\t\t %d\t\t    %d\n",i+1,bt[i],wt[i],tat[i],prt[i]);
     }
 
+    printf("Time quantum = %d\n",quantum);
     printf("Average waiting time = %.2f",(float)total_wt / (float)n);
-    printf("\nAverage turn around time = %.2f\n\n",(float)total_wt / (float)n);
+    printf("\nAverage turn around time = %.2f\n\n",(float)total_tat / (float)n);
 }
 
 // Driver code
@@ -203,14 +207,20 @@ int main()
         }
         burst_time[i] = atoi(chrarr3);
 
-        if(burst_time[i] <= 5){
-            priorities[i] = 1;
-        }else if(burst_time[i] > 5){
-            priorities[i] = 2;
-        }
+        // if(burst_time[i] <= quantum){
+        //     priorities[i] = 1;
+        // }else if(burst_time[i] > quantum){
+        //     priorities[i] = 2;
+        // }
     }
 
-    findavgTime(processes, n, burst_time, quantum,priorities);
+    for (i=0; i < num_processes; i++)
+    {
+        priorities[i] = 1;
+        printf("process %d queued in queue 1(RR).\n",i+1);
+    }
+
+    findavgTime(processes, n, burst_time, quantum, priorities);
 
     return 0;
 }
