@@ -72,6 +72,9 @@ void findWaitingTime(int processes[], int n,
                     //after allocated time quantum, process is demoted to queue 2
                     printf("process %d demoted to queue 2(FCFS).\n", i+1);
                     prt[i] = 2;
+
+
+
                 }
 
                 // If burst time is smaller than or equal to
@@ -92,8 +95,7 @@ void findWaitingTime(int processes[], int n,
                 }
             }
 
-
-            //FCFS
+            //FCFS part
             //remaining processes are scheduled using first come first serve schedular.
             else if (rem_bt[i] > 0 && prt[i] == 2)
             {
@@ -159,7 +161,6 @@ void findavgTime(int processes[], int n, int bt[],
 // Driver code
 int main()
 {
-
     int num_processes, i,quantum, process_priority;
     char chrarr1[10], chrarr2[10], chrarr3[10];
 
@@ -170,6 +171,9 @@ int main()
     printf("Set time quantum.\n");
     gets(chrarr2);
 
+    //input output error handling
+    //make sure num of process and quantum more than 0 and inputs does not contain character
+    //atoi converts string to int
     while(atoi(chrarr1) <= 0 || atoi(chrarr2) <= 0 || haschar(chrarr1, strlen(chrarr1)) || haschar(chrarr2, strlen(chrarr2))){
         printf("Number of processes and time quantum must be positive and cannot contain character, please enter again.\n");
         printf("Number of processes: \n");
@@ -181,7 +185,6 @@ int main()
     //convert string into int
     num_processes = atoi(chrarr1);
     quantum = atoi(chrarr2);
-
 
     int processes[num_processes];
 
@@ -206,14 +209,9 @@ int main()
             gets(chrarr3);
         }
         burst_time[i] = atoi(chrarr3);
-
-        // if(burst_time[i] <= quantum){
-        //     priorities[i] = 1;
-        // }else if(burst_time[i] > quantum){
-        //     priorities[i] = 2;
-        // }
     }
 
+    //all processes queued into queue 1(RR)
     for (i=0; i < num_processes; i++)
     {
         priorities[i] = 1;
